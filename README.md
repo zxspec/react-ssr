@@ -29,4 +29,14 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 - added `react` and `react-dom`
 - added `@babel/preset-react` to support react syntax and JSX
 - added `client/main.js` rendering `<div>` into `#react-root` DOM container
+
   - use `npx babel src/client/main.js` to test compilation results
+
+  #### add webpack to build client-side application
+
+  - added `webpack` allowing to build application bundle
+  - added `webpack-cli` allowing to initiate build from CLI
+  - added `babel-loader` allowing webpack to transform source files with Babel
+  - added initial webpack configuration `webpack.client.js`
+    - use `npx webpack --mode=development --config=webpack.client.js` to test initial webpack configuration
+  - added `build:dev` and `build:prod` scripts

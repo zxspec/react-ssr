@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/server/index.js"
+    "dev": "nodemon ./src/server/index.js",
+    "build:dev": "webpack --mode=development --config=webpack.client.js",
+    "build:prod": "webpack --mode=production --config=webpack.client.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +22,9 @@
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
-    "nodemon": "^2.0.7"
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
   }
 }
