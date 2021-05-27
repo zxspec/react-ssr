@@ -19,6 +19,7 @@ app.get("*", (_, res) => {
     </head>
     <body>
         <h1>🔥SSR🔥</h1>
+        <div id="react-root"></div>
     </body>
     </html>
 `);

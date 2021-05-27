@@ -5,7 +5,7 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 
 ## Main steps with description
 
-- added `Express`server
+- added `Express` server
 - added `nodemon` to automatically restart server when changed
 
 ### ES modules on Server Side
@@ -23,3 +23,10 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 
 - added handler default `app.get("*", () => {})`
 - serve static content from `public` folder
+
+### Create client-side react application
+
+- added `react` and `react-dom`
+- added `@babel/preset-react` to support react syntax and JSX
+- added `client/main.js` rendering `<div>` into `#react-root` DOM container
+  - use `npx babel src/client/main.js` to test compilation results
