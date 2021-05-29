@@ -48,3 +48,8 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 - added `css-loader` allowing to collect CSS from all the css files referenced in your application and put it into a string.
 - added `MiniCssExtractPlugin` extracting CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
   - use `build:dev` to check that `main.css` is emmited to `public/dist` folder
+
+### render client-side application on the markup returned from server
+
+- added script tag to load `bundle.js` and thus render SPA
+- added link tag to load `main.css`

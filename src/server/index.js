@@ -15,11 +15,12 @@ app.get("*", (_, res) => {
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="dist/main.css">
     </head>
     <body>
         <h1>🔥SSR🔥</h1>
         <div id="react-root"></div>
+        <script src="dist/bundle.js"></script>
     </body>
     </html>
 `);
