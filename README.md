@@ -53,3 +53,11 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 
 - added script tag to load `bundle.js` and thus render SPA
 - added link tag to load `main.css`
+
+#### improve build
+
+- renamed `dev` to `dev:server`
+- renamed `build:dev` to `dev:build-client`
+- added `--watch` flag to `build:dev`
+- added `npm-run-all` allowing to run npm script in parallel
+- added `dev` script allowing to start server and build client-side app in development mode
