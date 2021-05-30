@@ -61,3 +61,5 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 - added `--watch` flag to `build:dev`
 - added `npm-run-all` allowing to run npm script in parallel
 - added `dev` script allowing to start server and build client-side app in development mode
+
+### add application components <A/> <B/> <C/>
