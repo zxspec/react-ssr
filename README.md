@@ -84,3 +84,7 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 - added `webpack-node-externals` allowing to exclude `node_modules` from bundling
 - extracted common webpack configuration into `webpack.base.js`
 - removed `babel-node`since webpack is responsible for code transormation
+
+#### modify client-side app
+
+- changed `render` to `hydrate`; it allows to attach events to a markup received from a server without rebuilding DOM from scratch
