@@ -62,4 +62,25 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 - added `npm-run-all` allowing to run npm script in parallel
 - added `dev` script allowing to start server and build client-side app in development mode
 
-### add application components <A/> <B/> <C/>
+### add application components
+
+- render `<A/>`, `<B/>`, `<C/>` components inside `<App/>`
+
+### add Server Side Rendering
+
+- added `contentRenderer` helper responsible for content rendering functionality
+- update `contentRenderer` to render `<App/>`
+
+#### webpack for server-side code
+
+- added initial webpack configuration `webpack.server.js`, since server-side code needs to render React code
+  - use `npx webpack --config=webpack.server.js` to test configuration
+- updated bundle path to `../public` in `index.js`
+- added `dev:build-server`
+- updated `dev:server` to automatically restart a server after `build` folder changed
+
+#### webpack optimisations
+
+- added `webpack-node-externals` allowing to exclude `node_modules` from bundling
+- extracted common webpack configuration into `webpack.base.js`
+- removed `babel-node`since webpack is responsible for code transormation
