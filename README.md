@@ -88,3 +88,7 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 #### modify client-side app
 
 - changed `render` to `hydrate`; it allows to attach events to a markup received from a server without rebuilding DOM from scratch
+
+### add loadable components on front-end
+
+- converted componets `<A/>` and `<B/>` into loadable

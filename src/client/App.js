@@ -1,8 +1,11 @@
 import React from "react";
-import "./App.css";
-import A from "./components/A";
-import B from "./components/B";
+import loadable from "@loadable/component";
+
+const A = loadable(() => import("./components/A"));
+const B = loadable(() => import("./components/B"));
 import C from "./components/C";
+
+import "./App.css";
 
 const App = () => (
   <div>
