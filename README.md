@@ -92,3 +92,36 @@ Original code is published [here](https://github.com/gregberge/loadable-componen
 ### add loadable components on front-end
 
 - converted componets `<A/>` and `<B/>` into loadable
+
+### add loadable components for SSR
+
+follow instructions from [original documentation](https://loadable-components.com/docs/server-side-rendering/)
+
+- added `@loadable/server` which adds SSR support and provides access to `ChunkExtractor`
+- added `@loadable/babel-plugin` which adds SSR support and automatic chunk names.
+  - added `@loadable/babel-plugin` to babel config
+- added `@loadable/webpack-plugin` loadable-stats.json
+  - added `@loadable/webpack-plugin` to webpack config
+- added `clean` script, used to clean up previous build artifacts
+
+#### setup ChunkExtractor server-side
+
+- instantiated `chunkExtractor` and passed as parameter to `contentRenderer`
+
+##### content renderer
+
+- collect information about used styles from `chunkExtractor`
+- inject styles into response
+- removed hardcoded link to `dist/main.css`
+- collect information about used scripts from `chunkExtractor`
+- inject scripts into response
+- removed hardcoded link to `dist/bundle.js`
+
+##### update server-side webpack config
+
+- added `publicPath: "/dist/"` output option, it required to generate same asset urls on server- and client- sides
+
+#### add loadableReady client-side
+
+- wrap application rendering in `loadableReady(() => {. . .})`, it wait for all loadable components to be loaded.  
+  This method is required because SSR is being used.

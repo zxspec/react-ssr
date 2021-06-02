@@ -1,11 +1,12 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const LoadablePlugin = require("@loadable/webpack-plugin");
 
 const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
 module.exports = {
   mode: isDev ? "development" : "production",
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [new MiniCssExtractPlugin(), new LoadablePlugin()],
   module: {
     rules: [
       {
