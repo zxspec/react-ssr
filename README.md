@@ -125,3 +125,10 @@ follow instructions from [original documentation](https://loadable-components.co
 
 - wrap application rendering in `loadableReady(() => {. . .})`, it wait for all loadable components to be loaded.  
   This method is required because SSR is being used.
+
+### add react router
+
+- added `Letter` component rendering `<A/>`, `<B/>`, `<C/>` components
+- added `page` folder for page components
+- added `HomePage` component which renders `Letters` component
+- added `OtherPage` stub component
