@@ -132,3 +132,10 @@ follow instructions from [original documentation](https://loadable-components.co
 - added `page` folder for page components
 - added `HomePage` component which renders `Letters` component
 - added `OtherPage` stub component
+
+#### setup react router
+
+- added `react-router-dom`
+- added `Routes` component which will be used for both, front- and back- ends
+- added route `/` for `HomePage`
+- added route `/other` for `OtherPage`
