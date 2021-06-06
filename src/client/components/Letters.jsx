@@ -1,7 +1,9 @@
 import React from "react";
 
-import A from "./A";
-import B from "./B";
+import loadable from "@loadable/component";
+
+const A = loadable(() => import("./A"));
+const B = loadable(() => import("./B"));
 import C from "./C";
 
 export default () => (

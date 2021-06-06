@@ -140,9 +140,13 @@ follow instructions from [original documentation](https://loadable-components.co
 - added route `/` for `HomePage`
 - added route `/other` for `OtherPage`
 
-#### add react routing on server side
+#### add react routing on server-side
 
 #### contentRenderer
 
 - render `<Routes/>` component wrapped in `<StaticRouter/>` instead of `<App/>`
 - added `location` mandatory parameter to the `<StaticRouter/>`; based on the `location` parameter router decides what `<Route/>` to render
+
+#### add react routing on client-side
+
+- replaced `<App/>` with `<Routes/>` in `main.js`;

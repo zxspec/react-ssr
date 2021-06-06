@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { loadableReady } from "@loadable/component";
+import { BrowserRouter } from "react-router-dom";
 
-import App from "./App";
+import Routes from "./Routes";
 
 loadableReady(() => {
-  ReactDom.hydrate(<App />, document.getElementById("react-root"));
+  ReactDom.hydrate(
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>,
+    document.getElementById("react-root")
+  );
 });
