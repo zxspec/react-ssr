@@ -1,9 +1,15 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
-import App from "../../client/App";
+import { StaticRouter } from "react-router-dom";
 
-export default (chunkExtractor) => {
-  const jsx = chunkExtractor.collectChunks(<App />);
+import Routes from "../../client/Routes";
+
+export default ({ chunkExtractor, location }) => {
+  const jsx = chunkExtractor.collectChunks(
+    <StaticRouter location={location}>
+      <Routes />
+    </StaticRouter>
+  );
 
   const content = renderToString(jsx);
 

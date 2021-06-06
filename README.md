@@ -139,3 +139,10 @@ follow instructions from [original documentation](https://loadable-components.co
 - added `Routes` component which will be used for both, front- and back- ends
 - added route `/` for `HomePage`
 - added route `/other` for `OtherPage`
+
+#### add react routing on server side
+
+#### contentRenderer
+
+- render `<Routes/>` component wrapped in `<StaticRouter/>` instead of `<App/>`
+- added `location` mandatory parameter to the `<StaticRouter/>`; based on the `location` parameter router decides what `<Route/>` to render

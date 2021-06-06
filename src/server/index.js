@@ -14,8 +14,11 @@ const statsFile = path.resolve(
 );
 const extractor = new ChunkExtractor({ statsFile });
 
-app.get("*", (_, res) => {
-  const content = contentRenderer(extractor);
+app.get("*", (req, res) => {
+  const content = contentRenderer({
+    chunkExtractor: extractor,
+    location: req.path,
+  });
 
   res.set("content-type", "text/html");
   res.send(content);
