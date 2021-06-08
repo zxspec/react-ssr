@@ -28,7 +28,6 @@ export default ({ chunkExtractor, location }) => {
             ${styleTags} 
         </head>
         <body>
-            <h1>🔥 SSR 🔥</h1>
             <div id="react-root">${content}</div>
             ${scriptTags}
         </body>
