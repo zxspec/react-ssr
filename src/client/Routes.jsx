@@ -1,12 +1,15 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import loadable from "@loadable/component";
 
-import HomePage from "./pages/HomePage";
-import OtherPage from "./pages/OtherPage";
+const HomePage = loadable(() => import("./pages/HomePage"));
+const FilmsPage = loadable(() => import("./pages/FilmsPage"));
+const CharactersPage = loadable(() => import("./pages/CharactersPage"));
 
 export default () => (
-  <>
-    <Route path="/other" component={OtherPage} />
+  <Switch>
+    <Route path="/films" component={FilmsPage} />
+    <Route path="/people" component={CharactersPage} />
     <Route exact path="/" component={HomePage} />
-  </>
+  </Switch>
 );
