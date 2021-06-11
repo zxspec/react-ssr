@@ -5,11 +5,20 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import axios from "axios";
 
 import Routes from "./Routes";
 import reducers from "./reducers";
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const axiosInstance = axios.create({
+  baseURL: "https://ghibliapi.herokuapp.com",
+});
+
+const store = createStore(
+  reducers,
+  {},
+  applyMiddleware(thunk.withExtraArgument(axiosInstance))
+);
 
 loadableReady(() => {
   ReactDom.hydrate(
