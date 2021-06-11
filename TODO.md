@@ -5,5 +5,5 @@
 3. hot reload
 4. ~~add react-router~~
 5. add and test "preload/prefetch" links
-6. use http-proxy-midleware for requests to external APIs
+6. ~~use http-proxy-midleware for requests to external APIs~~
 7. try redux toolkit

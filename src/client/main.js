@@ -10,9 +10,7 @@ import axios from "axios";
 import Routes from "./Routes";
 import reducers from "./reducers";
 
-const axiosInstance = axios.create({
-  baseURL: "https://ghibliapi.herokuapp.com",
-});
+const axiosInstance = axios.create({ baseURL: "/api" });
 
 const store = createStore(
   reducers,
