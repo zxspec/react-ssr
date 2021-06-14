@@ -1,12 +1,13 @@
 import React from "react";
 
 import Header from "./Header";
+import { renderRoutes } from "react-router-config";
 
 import "./PageLayout.css";
 
-export default ({ children }) => (
+export default ({ route }) => (
   <div className="content">
     <Header />
-    <main>{children}</main>
+    <main>{renderRoutes(route.routes)}</main>
   </div>
 );

@@ -2,14 +2,15 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { renderRoutes } from "react-router-config";
 
-import Routes from "../../client/Routes";
+import routesConfig from "../../client/routesConfig";
 
 export default ({ chunkExtractor, location, store }) => {
   const jsx = chunkExtractor.collectChunks(
     <Provider store={store}>
       <StaticRouter location={location}>
-        <Routes />
+        {renderRoutes(routesConfig)}
       </StaticRouter>
     </Provider>
   );
