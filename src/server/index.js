@@ -4,6 +4,7 @@ import { ChunkExtractor } from "@loadable/server";
 import { createProxyMiddleware } from "http-proxy-middleware";
 
 import contentRenderer from "./helper/contentRenderer";
+import createStore from "./helper/createStore";
 
 const PORT = process.env.PORT || 9999;
 
@@ -25,9 +26,11 @@ const statsFile = path.resolve(
 const extractor = new ChunkExtractor({ statsFile });
 
 app.get("*", (req, res) => {
+  const store = createStore();
   const content = contentRenderer({
     chunkExtractor: extractor,
     location: req.path,
+    store,
   });
 
   res.set("content-type", "text/html");
