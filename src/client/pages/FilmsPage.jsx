@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import PageLayout from "../components/PageLayout";
+import { fetchFilms } from "../actions";
 import Films from "../components/Films";
+import PageLayout from "../components/PageLayout";
 
-export default () => (
-  <PageLayout>
-    <Films />
-  </PageLayout>
-);
+export default () => {
+  const dispatch = useDispatch();
+  const films = useSelector((state) => state.films);
+  useEffect(() => dispatch(fetchFilms()), []);
+
+  return (
+    <PageLayout>
+      <Films films={films} />
+    </PageLayout>
+  );
+};
