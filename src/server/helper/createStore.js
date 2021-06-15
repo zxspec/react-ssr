@@ -5,7 +5,7 @@ import reducers from "../../client/reducers";
 
 export default () => {
   const axiosInstance = axios.create({
-    baseURL: "http://react-ssr-api.herokuapp.com",
+    baseURL: "https://ghibliapi.herokuapp.com",
   });
 
   const store = createStore(

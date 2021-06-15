@@ -20,8 +20,8 @@ export default [
         component: HomePage,
       },
       {
+        ...FilmsPage,
         path: "/films",
-        component: FilmsPage,
       },
       {
         path: "/people",

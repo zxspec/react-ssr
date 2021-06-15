@@ -5,6 +5,8 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 
 import contentRenderer from "./helper/contentRenderer";
 import createStore from "./helper/createStore";
+import routesConfig from "../client/routesConfig";
+import preloadStoreData from "./helper/preloadStoreData";
 
 const PORT = process.env.PORT || 9999;
 
@@ -25,8 +27,16 @@ const statsFile = path.resolve(
 );
 const extractor = new ChunkExtractor({ statsFile });
 
-app.get("*", (req, res) => {
+app.get("*", async (req, res) => {
   const store = createStore();
+
+  try {
+    await preloadStoreData(store, routesConfig, req.path);
+  } catch (err) {
+    // TODO add propererror handling
+    console.error("### err: ", err);
+  }
+
   const content = contentRenderer({
     chunkExtractor: extractor,
     location: req.path,

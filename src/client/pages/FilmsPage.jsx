@@ -4,11 +4,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchFilms } from "../actions";
 import Films from "../components/Films";
 
-export default () => {
+const component = () => {
   const dispatch = useDispatch();
-  const films = useSelector((state) => state.films);
+  const films = useSelector((state) => state.films) ?? [];
 
-  useEffect(() => dispatch(fetchFilms()), []);
+  useEffect(() => {
+    if (window.INITIAL_STATE?.films) {
+      window.INITIAL_STATE.films = undefined;
+    } else {
+      dispatch(fetchFilms());
+    }
+  }, []);
 
   return <Films films={films} />;
+};
+
+const loadData = (store) => store.dispatch(fetchFilms());
+
+export default {
+  component,
+  loadData,
 };

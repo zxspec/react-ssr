@@ -3,6 +3,7 @@ import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { renderRoutes } from "react-router-config";
+import serialize from "serialize-javascript";
 
 import routesConfig from "../../client/routesConfig";
 
@@ -34,6 +35,9 @@ export default ({ chunkExtractor, location, store }) => {
         <body>
             <div id="react-root">${content}</div>
             ${scriptTags}
+            <script>
+              window.INITIAL_STATE = ${serialize(store.getState())} 
+          </script>
         </body>
         </html>
     `;
