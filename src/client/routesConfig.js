@@ -2,6 +2,7 @@ import PageLayout from "./components/PageLayout";
 
 import HomePage from "./pages/HomePage";
 import FilmsPage from "./pages/FilmsPage";
+import FilmPage from "./pages/FilmPage";
 import CharactersPage from "./pages/CharactersPage";
 
 // import loadable from "@loadable/component";
@@ -21,7 +22,12 @@ export default [
       },
       {
         ...FilmsPage,
+        exact: true,
         path: "/films",
+      },
+      {
+        ...FilmPage,
+        path: "/films/:id",
       },
       {
         ...CharactersPage,
