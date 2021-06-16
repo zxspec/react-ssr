@@ -1,5 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+import { fetchCharacters } from "../actions";
 import Characters from "../components/Characters";
 
-export default () => <Characters />;
+const component = () => {
+  const dispatch = useDispatch();
+  const characters = useSelector((state) => state.characters) ?? [];
+
+  useEffect(() => {
+    if (window.INITIAL_STATE?.characters) {
+      window.INITIAL_STATE.characters = undefined;
+    } else {
+      dispatch(fetchCharacters());
+    }
+  }, []);
+
+  return <Characters films={characters} />;
+};
+
+const loadData = (store) => store.dispatch(fetchCharacters());
+
+export default {
+  component,
+  loadData,
+};

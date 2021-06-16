@@ -24,8 +24,8 @@ export default [
         path: "/films",
       },
       {
+        ...CharactersPage,
         path: "/people",
-        component: CharactersPage,
       },
     ],
   },

@@ -1,3 +1,12 @@
 import React from "react";
 
-export default () => <h1>Characters List</h1>;
+export default ({ films: characters }) => (
+  <>
+    <h1>Studio Ghibli Characters</h1>
+    <ul>
+      {characters.map((character, idx) => (
+        <li key={idx}>{character.name}</li>
+      ))}
+    </ul>
+  </>
+);
