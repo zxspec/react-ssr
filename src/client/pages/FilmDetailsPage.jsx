@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { fetchFilms } from "../actions";
-import Film from "../components/Film";
+import FilmDetails from "../components/FilmDetails";
 
 const component = () => {
   const { id } = useParams();
@@ -20,7 +20,7 @@ const component = () => {
     }
   }, []);
 
-  return film ? <Film film={film} /> : null;
+  return film ? <FilmDetails film={film} /> : null;
 };
 
 const loadData = (store) => store.dispatch(fetchFilms());

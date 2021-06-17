@@ -7,3 +7,5 @@
 5. add and test "preload/prefetch" links
 6. ~~use http-proxy-midleware for requests to external APIs~~
 7. try redux toolkit
+8. add film links
+9. add character links
