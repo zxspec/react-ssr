@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import FilmsPage from "./pages/FilmsPage";
 import FilmDetailsPage from "./pages/FilmDetailsPage";
 import CharactersPage from "./pages/CharactersPage";
+import CharacterDetailsPage from "./pages/CharacterDetailsPage";
 
 // import loadable from "@loadable/component";
 
@@ -31,7 +32,12 @@ export default [
       },
       {
         ...CharactersPage,
+        exact: true,
         path: "/people",
+      },
+      {
+        ...CharacterDetailsPage,
+        path: "/people/:id",
       },
     ],
   },

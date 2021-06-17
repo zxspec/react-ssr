@@ -1,22 +1,26 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { fetchCharacters } from "../actions";
-import Characters from "../components/Characters";
+import CharacterDetails from "../components/CharacterDetails";
 
 const component = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const characters = useSelector((state) => state.characters) ?? [];
+  const character = useSelector((state) =>
+    state.characters.find((character) => character.id === id)
+  );
 
   useEffect(() => {
-    if (window.INITIAL_STATE?.characters?.length > 0) {
+    if (window.INITIAL_STATE?.characters) {
       window.INITIAL_STATE.characters = undefined;
     } else {
       dispatch(fetchCharacters());
     }
   }, []);
 
-  return <Characters characters={characters} />;
+  return character ? <CharacterDetails character={character} /> : null;
 };
 
 const loadData = (store) => store.dispatch(fetchCharacters());
