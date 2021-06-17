@@ -9,7 +9,7 @@ const component = () => {
   const characters = useSelector((state) => state.characters) ?? [];
 
   useEffect(() => {
-    if (window.INITIAL_STATE?.characters) {
+    if (window.INITIAL_STATE?.characters?.length > 0) {
       window.INITIAL_STATE.characters = undefined;
     } else {
       dispatch(fetchCharacters());

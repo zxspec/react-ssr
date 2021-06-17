@@ -9,7 +9,7 @@ const component = () => {
   const films = useSelector((state) => state.films) ?? [];
 
   useEffect(() => {
-    if (window.INITIAL_STATE?.films) {
+    if (window.INITIAL_STATE?.films?.length > 0) {
       window.INITIAL_STATE.films = undefined;
     } else {
       dispatch(fetchFilms());
