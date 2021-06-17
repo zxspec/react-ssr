@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { fetchCharacters } from "../actions";
+import { fetchCharacters } from "../store/actions";
 import CharacterDetails from "../components/CharacterDetails";
 
 const component = () => {
