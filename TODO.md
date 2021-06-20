@@ -8,4 +8,4 @@
 6. ~~use http-proxy-midleware for requests to external APIs~~
 7. try redux toolkit
 8. ~~add film links~~
-9. add character links
+9. ~~add character links~~
