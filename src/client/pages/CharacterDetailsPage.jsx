@@ -2,28 +2,31 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { fetchCharacters } from "../store/actions";
+import { fetchCharacterDetails } from "../store/actions";
 import CharacterDetails from "../components/CharacterDetails";
 
 const component = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const character = useSelector((state) =>
-    state.characters.find((character) => character.id === id)
-  );
+
+  const character = useSelector((state) => state.characterDetails[id]);
 
   useEffect(() => {
-    if (window.INITIAL_STATE?.characters) {
-      window.INITIAL_STATE.characters = undefined;
+    if (window.INITIAL_STATE?.characterDetails) {
+      window.INITIAL_STATE.characterDetails = undefined;
     } else {
-      dispatch(fetchCharacters());
+      dispatch(fetchCharacterDetails(id));
     }
   }, []);
 
-  return character ? <CharacterDetails character={character} /> : null;
+  return character ? (
+    <CharacterDetails character={character} />
+  ) : (
+    <h1>No character with id: {id}</h1>
+  );
 };
 
-const loadData = (store) => store.dispatch(fetchCharacters());
+const loadData = (store, { id }) => store.dispatch(fetchCharacterDetails(id));
 
 export default {
   component,

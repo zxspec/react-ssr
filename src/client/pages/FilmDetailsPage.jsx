@@ -20,7 +20,11 @@ const component = () => {
     }
   }, []);
 
-  return film ? <FilmDetails film={film} /> : null;
+  return film ? (
+    <>
+      <FilmDetails film={film} />
+    </>
+  ) : null;
 };
 
 const loadData = (store) => store.dispatch(fetchFilms());
