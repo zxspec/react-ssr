@@ -2,27 +2,26 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { fetchFilms } from "../store/actions";
+import { fetchFilms, fetchFilmDetails } from "../store/actions";
 import FilmDetails from "../components/FilmDetails";
 
 const component = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const film = useSelector((state) =>
-    state.films.find((film) => film.id === id)
-  );
+
+  const filmDetails = useSelector((state) => state.filmDetails[id]);
 
   useEffect(() => {
-    if (window.INITIAL_STATE?.films) {
-      window.INITIAL_STATE.films = undefined;
+    if (window.INITIAL_STATE?.fetchFilmDetails) {
+      window.INITIAL_STATE.fetchFilmDetails = undefined;
     } else {
-      dispatch(fetchFilms());
+      dispatch(fetchFilmDetails(id));
     }
   }, []);
 
-  return film ? (
+  return filmDetails ? (
     <>
-      <FilmDetails film={film} />
+      <FilmDetails filmDetails={filmDetails} />
     </>
   ) : null;
 };

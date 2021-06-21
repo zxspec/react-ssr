@@ -21,6 +21,10 @@ export const fetchFilmDetails = (id) => async (dispatch, getState, api) => {
 
   const { data } = await api.get(`/films/${id}`);
 
+  const characterIds = extractCharacterIds(data.people);
+
+  data.characters = await getCharactersShortData(api, characterIds);
+
   dispatch({
     type: FETCH_FILM_DETAILS,
     payload: { data },
@@ -31,12 +35,15 @@ export const fetchCharacters = () => async (dispatch, getState, api) => {
   const { characters } = getState();
   if (characters?.length) return;
 
+  // TODO skip next step for the characters already in store
   const { data } = await api.get("/people?fields=id,name");
 
   dispatch({
     type: FETCH_CHARACTERS,
     payload: { data },
   });
+
+  // TODO add found characters to store
 };
 
 export const fetchCharacterDetails =
@@ -76,4 +83,25 @@ async function getFilmsShortData(api, filmIds) {
   const responses = await Promise.all(filmsDataRequests);
 
   return responses.map((f) => f.data);
+}
+
+function extractCharacterIds(characterUrls) {
+  const CHARACTERS_PATH = "/people/";
+
+  return characterUrls.map((characterUrl) => {
+    const pos =
+      characterUrl.lastIndexOf(CHARACTERS_PATH) + CHARACTERS_PATH.length;
+    return characterUrl.substr(pos);
+  });
+}
+
+async function getCharactersShortData(api, characterIds) {
+  if (!characterIds?.length) return [];
+
+  const charactersDataRequests = characterIds.map((id) =>
+    api.get(`/people/${id}?fileds=id,name`)
+  );
+  const responses = await Promise.all(charactersDataRequests);
+
+  return responses.map((c) => c.data);
 }
