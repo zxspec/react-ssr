@@ -9,7 +9,7 @@ const component = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const character = useSelector((state) => state.characterDetails[id]);
+  const characterDetails = useSelector((state) => state.characterDetails[id]);
 
   useEffect(() => {
     if (window.INITIAL_STATE?.characterDetails) {
@@ -19,8 +19,8 @@ const component = () => {
     }
   }, []);
 
-  return character ? (
-    <CharacterDetails character={character} />
+  return characterDetails ? (
+    <CharacterDetails characterDetails={characterDetails} />
   ) : (
     <h1>No character with id: {id}</h1>
   );

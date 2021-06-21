@@ -1,13 +1,12 @@
 import React from "react";
 
-export default ({ character }) => {
-  const { name, gender, age, films } = character;
+export default ({ characterDetails }) => {
+  const { name, gender, age, films } = characterDetails;
 
   return (
     <>
       <h1>{name}</h1>
-
-      <p>
+      <div>
         <h2>Gender: {gender}</h2>
         <h2>Age: {age}</h2>
         <h2>Films:</h2>
@@ -18,7 +17,7 @@ export default ({ character }) => {
             </li>
           ))}
         </ul>
-      </p>
+      </div>
     </>
   );
 };
