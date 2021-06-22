@@ -1,3 +1,9 @@
+import {
+  extractFilmIds,
+  extractCharacterIds,
+  getFilmsShortData,
+} from "./utils";
+
 export const FETCH_FILMS = "FETCH_FILMS";
 export const FETCH_FILM_DETAILS = "FETCH_FILM_DETAILS";
 export const FETCH_CHARACTERS = "FETCH_CHARACTERS";
@@ -48,52 +54,27 @@ export const fetchCharacters = () => async (dispatch, getState, api) => {
 
 export const fetchCharacterDetails =
   (id) => async (dispatch, getState, api) => {
-    const { characterDetails } = getState();
+    const { characterDetails, films } = getState();
     if (characterDetails?.[id]) return;
 
     const { data } = await api.get(`/people/${id}`);
 
     const filmIds = extractFilmIds(data.films);
 
-    // TODO skip next step for the films already in store
-    data.films = await getFilmsShortData(api, filmIds);
+    const { existingFilms, fetchedFilms } = await getFilmsShortData({
+      api,
+      filmIds,
+      films,
+    });
+    data.films = [...existingFilms, ...fetchedFilms];
 
     await dispatch({
       type: FETCH_CHARACTER_DETAILS,
       payload: { data },
     });
-    // TODO add found films to store
+
+    // TODO add  fetched films to store
   };
-
-function extractFilmIds(filmUrls) {
-  const FILMS_PATH = "/films/";
-
-  return filmUrls.map((filmUrl) => {
-    const pos = filmUrl.lastIndexOf(FILMS_PATH) + FILMS_PATH.length;
-    return filmUrl.substr(pos);
-  });
-}
-
-async function getFilmsShortData(api, filmIds) {
-  if (!filmIds?.length) return [];
-
-  const filmsDataRequests = filmIds.map((id) =>
-    api.get(`/films/${id}?fileds=id,title`)
-  );
-  const responses = await Promise.all(filmsDataRequests);
-
-  return responses.map((f) => f.data);
-}
-
-function extractCharacterIds(characterUrls) {
-  const CHARACTERS_PATH = "/people/";
-
-  return characterUrls.map((characterUrl) => {
-    const pos =
-      characterUrl.lastIndexOf(CHARACTERS_PATH) + CHARACTERS_PATH.length;
-    return characterUrl.substr(pos);
-  });
-}
 
 async function getCharactersShortData(api, characterIds) {
   if (!characterIds?.length) return [];
