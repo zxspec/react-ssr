@@ -19,14 +19,19 @@ export function extractCharacterIds(characterUrls) {
 }
 
 export async function getFilmsShortData({ api, filmIds, films }) {
+  const existingFilms = [];
   const filmIdsToFetch = [];
 
-  const existingFilms = films.filter((film) => {
-    if (ids.includes(film.id)) return true;
-    filmIdsToFetch.push(film);
+  filmIds.forEach((id) => {
+    const film = films.find((f) => f.id === id);
+    if (film) {
+      existingFilms.push(film);
+    } else {
+      filmIdsToFetch.push(id);
+    }
   });
 
-  const filmsDataRequests = filmIds.map((id) =>
+  const filmsDataRequests = filmIdsToFetch.map((id) =>
     api.get(`${FILMS_PATH}/${id}?fileds=id,title`)
   );
   const fetchedFilmsData = await Promise.all(filmsDataRequests);

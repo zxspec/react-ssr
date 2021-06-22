@@ -9,3 +9,5 @@
 7. try redux toolkit
 8. ~~add film links~~
 9. ~~add character links~~
+10. convert Films store to dictionary
+11. add reducer for adding new films
