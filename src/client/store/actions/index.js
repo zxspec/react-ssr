@@ -15,7 +15,6 @@ export const fetchFilms = () => async (dispatch, getState, api) => {
   if (films?.length) return;
 
   const { data } = await api.get("/films?fields=id,title");
-
   const filmsData = data.reduce((acc, film) => {
     acc[film.id] = film;
     return acc;
@@ -33,7 +32,6 @@ export const fetchFilmDetails = (id) => async (dispatch, getState, api) => {
   const { data } = await api.get(`/films/${id}`);
 
   const characterIds = extractCharacterIds(data.people);
-
   const { existingCharacters, fetchedCharacters } =
     await getCharactersShortData({
       api,
@@ -55,10 +53,14 @@ export const fetchCharacters = () => async (dispatch, getState, api) => {
   if (characters?.length) return;
 
   const { data } = await api.get("/people?fields=id,name");
+  const charactersData = data.reduce((acc, character) => {
+    acc[character.id] = character;
+    return acc;
+  }, {});
 
   dispatch({
     type: FETCH_CHARACTERS,
-    payload: { data },
+    payload: { data: charactersData },
   });
 };
 

@@ -49,7 +49,7 @@ export async function getCharactersShortData({
   const characterIdsToFetch = [];
 
   characterIds.forEach((id) => {
-    const character = characters.find((c) => c.id === id);
+    const character = characters[id];
     if (character) {
       existingCharacters.push(character);
     } else {
