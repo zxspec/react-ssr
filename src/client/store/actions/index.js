@@ -16,9 +16,14 @@ export const fetchFilms = () => async (dispatch, getState, api) => {
 
   const { data } = await api.get("/films?fields=id,title");
 
+  const filmsData = data.reduce((acc, film) => {
+    acc[film.id] = film;
+    return acc;
+  }, {});
+
   dispatch({
     type: FETCH_FILMS,
-    payload: { data },
+    payload: { data: filmsData },
   });
 };
 
