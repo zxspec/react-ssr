@@ -23,7 +23,7 @@ export async function getFilmsShortData({ api, filmIds, films }) {
   const filmIdsToFetch = [];
 
   filmIds.forEach((id) => {
-    const film = films.find((f) => f.id === id);
+    const film = films[id];
     if (film) {
       existingFilms.push(film);
     } else {
