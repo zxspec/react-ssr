@@ -13,8 +13,8 @@ export default ({ filmDetails }) => {
       </h1>
       <div>
         <h2>Release Date: {release_date}</h2>
-        <h2>Characters:</h2>
         <p>{description}</p>
+        <h2>Characters:</h2>
         <ul>
           {characters.map((character) => (
             <li key={character.id}>

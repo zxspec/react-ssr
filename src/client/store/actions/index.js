@@ -2,6 +2,7 @@ import {
   extractFilmIds,
   extractCharacterIds,
   getFilmsShortData,
+  getCharactersShortData,
 } from "./utils";
 
 export const FETCH_FILMS = "FETCH_FILMS";
@@ -22,34 +23,38 @@ export const fetchFilms = () => async (dispatch, getState, api) => {
 };
 
 export const fetchFilmDetails = (id) => async (dispatch, getState, api) => {
-  const { filmDetails } = getState();
+  const { filmDetails, characters } = getState();
   if (filmDetails?.[id]) return;
-
   const { data } = await api.get(`/films/${id}`);
 
   const characterIds = extractCharacterIds(data.people);
 
-  data.characters = await getCharactersShortData(api, characterIds);
+  const { existingCharacters, fetchedCharacters } =
+    await getCharactersShortData({
+      api,
+      characterIds,
+      characters,
+    });
+
+  data.characters = [...existingCharacters, ...fetchedCharacters];
 
   dispatch({
     type: FETCH_FILM_DETAILS,
     payload: { data },
   });
+  // TODO add fetched characters to store
 };
 
 export const fetchCharacters = () => async (dispatch, getState, api) => {
   const { characters } = getState();
   if (characters?.length) return;
 
-  // TODO skip next step for the characters already in store
   const { data } = await api.get("/people?fields=id,name");
 
   dispatch({
     type: FETCH_CHARACTERS,
     payload: { data },
   });
-
-  // TODO add found characters to store
 };
 
 export const fetchCharacterDetails =
@@ -73,16 +78,5 @@ export const fetchCharacterDetails =
       payload: { data },
     });
 
-    // TODO add  fetched films to store
+    // TODO add fetched films to store
   };
-
-async function getCharactersShortData(api, characterIds) {
-  if (!characterIds?.length) return [];
-
-  const charactersDataRequests = characterIds.map((id) =>
-    api.get(`/people/${id}?fileds=id,name`)
-  );
-  const responses = await Promise.all(charactersDataRequests);
-
-  return responses.map((c) => c.data);
-}

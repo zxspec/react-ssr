@@ -39,3 +39,29 @@ export async function getFilmsShortData({ api, filmIds, films }) {
 
   return { existingFilms, fetchedFilms };
 }
+
+export async function getCharactersShortData({
+  api,
+  characterIds,
+  characters,
+}) {
+  const existingCharacters = [];
+  const characterIdsToFetch = [];
+
+  characterIds.forEach((id) => {
+    const character = characters.find((c) => c.id === id);
+    if (character) {
+      existingCharacters.push(character);
+    } else {
+      characterIdsToFetch.push(id);
+    }
+  });
+
+  const charactersDataRequests = characterIdsToFetch.map((id) =>
+    api.get(`${CHARACTERS_PATH}/${id}?fileds=id,name`)
+  );
+  const fetchedCharactersData = await Promise.all(charactersDataRequests);
+  const fetchedCharacters = fetchedCharactersData.map((c) => c.data);
+
+  return { existingCharacters, fetchedCharacters };
+}
