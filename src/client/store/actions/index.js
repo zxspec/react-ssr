@@ -3,8 +3,10 @@ import {
   extractCharacterIds,
   getFilmsShortData,
   getCharactersShortData,
+  listToDict,
 } from "./utils";
 
+export const ADD_FILMS = "ADD_FILMS";
 export const FETCH_FILMS = "FETCH_FILMS";
 export const FETCH_FILM_DETAILS = "FETCH_FILM_DETAILS";
 export const FETCH_CHARACTERS = "FETCH_CHARACTERS";
@@ -86,4 +88,10 @@ export const fetchCharacterDetails =
     });
 
     // TODO add fetched films to store
+    if (fetchedFilms.length) {
+      dispatch({
+        type: ADD_FILMS,
+        payload: { data: listToDict(fetchedFilms) },
+      });
+    }
   };

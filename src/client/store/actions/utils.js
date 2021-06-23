@@ -65,3 +65,10 @@ export async function getCharactersShortData({
 
   return { existingCharacters, fetchedCharacters };
 }
+
+export function listToDict(data) {
+  return data.reduce((acc, entity) => {
+    acc[entity.id] = entity;
+    return acc;
+  }, {});
+}
